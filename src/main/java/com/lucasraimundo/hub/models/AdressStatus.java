@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class AdressStatus {
+	public static final int DEFAULT_ID = 1;
 	
 	@Id
 	private int id;

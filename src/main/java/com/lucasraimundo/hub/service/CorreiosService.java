@@ -3,6 +3,7 @@ package com.lucasraimundo.hub.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lucasraimundo.hub.exception.NoContentException;
 import com.lucasraimundo.hub.models.Adress;
 import com.lucasraimundo.hub.models.Status;
 import com.lucasraimundo.hub.repository.AdressRepository;
@@ -21,8 +22,8 @@ public class CorreiosService {
 		return Status.READY;
 	}
 	
-	public Adress getAdressByZipcode(String zipcode) {
-		return null;
+	public Adress getAdressByZipcode(String zipcode) throws NoContentException {
+		return adressRepository.findById(zipcode).orElseThrow(NoContentException::new);
 	}
 	
 	public void setup() {
