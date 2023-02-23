@@ -18,7 +18,7 @@ public class Adress {
 	private String zipcode;
 	private String street;
 	private String district;
-	private String city;
 	private String state;
+	private String city;
 	
 }

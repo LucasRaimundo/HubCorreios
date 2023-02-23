@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucasraimundo.hub.exception.NoContentException;
+import com.lucasraimundo.hub.exception.NotReadyException;
 import com.lucasraimundo.hub.models.Adress;
 import com.lucasraimundo.hub.service.CorreiosService;
 
@@ -21,7 +22,7 @@ public class CorreiosController {
 	}
 	
 	@GetMapping("/zipcode/{zipcode}")
-	public Adress getAdressByZipcode(@PathVariable("zipcode") String zipcode) throws NoContentException {
+	public Adress getAdressByZipcode(@PathVariable("zipcode") String zipcode) throws NoContentException, NotReadyException {
 		
 		return this.service.getAdressByZipcode(zipcode);
 		
