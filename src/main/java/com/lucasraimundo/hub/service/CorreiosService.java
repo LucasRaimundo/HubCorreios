@@ -3,6 +3,7 @@ package com.lucasraimundo.hub.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class CorreiosService {
 
 	@Autowired
 	private SetupRepository setupRepository;
+	
+	@Value("${setup.on.startup}")
+	private boolean setupOnStartup;
 
 	public Status getStatus() {
 		return statusRepository.findById(AdressStatus.DEFAULT_ID)
@@ -49,6 +53,11 @@ public class CorreiosService {
 
 	@EventListener(ApplicationStartedEvent.class)
 	protected void setupOnStartUp() {
+		
+		if(!setupOnStartup) {
+			return;
+		}
+		
 		try {
 			this.setup();
 		} catch (Exception exc) {
